@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  form(action='http://localhost:4000/create/person' method='POST')
+    | name:
+    br
+    input(type='text' name='name')
+    br
+    |             companies:
+    br
+    input(type='text' name='companies' disabled)
+    br
+    | phone number:
+    br
+    input(type='text' name='phoneNumber')
+    br
+    input(type='submit' value='Submit')
+
+

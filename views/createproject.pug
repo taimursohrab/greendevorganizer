@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  form(action='http://localhost:4000/create/project' method='POST')
+    | name:
+    br
+    input(type='text' name='name')
+    br
+    |             owner:
+    br
+    select(name='owner')
+      each val in people
+        option(value=val._id) #{val.name}
+    br
+    | address:
+    br
+    input(type='text' name='address')
+    br
+    |             description:
+    br
+    input(type='text' name='desc')
+    input(type='submit' value='Submit')
+
+
