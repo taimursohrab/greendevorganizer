@@ -1,0 +1,22 @@
+{
+  "name": "greendevorganizer",
+  "version": "1.0.0",
+  "description": "This app is for organizing green developers data and information for analytics",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "chart.js": "^2.9.3",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "mongodb": "^3.5.0",
+    "mongoose": "^5.8.7",
+    "morgan": "~1.9.1",
+    "pug": "^2.0.0-beta11"
+  },
+  "author": "Taimur Sohrab",
+  "license": "SEE LICENSE IN LICENSE"
+}
