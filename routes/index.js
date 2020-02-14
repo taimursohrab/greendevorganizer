@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var models = require('../models/Models.js');
-var Company = models.Company;
-var Person = models.Person;
+
+var Company = require('../models/Company.js');
+var Person = require('../models/Person.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
