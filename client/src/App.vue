@@ -1,21 +1,14 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+    <NavbarComponent/>
     <div class="container">
       <div class="columns">
         <div class="column is-one-quarter">
-          <aside class="menu">
-            <p class="menu-label">
-              General
-            </p>
-            <ul class="menu-list">
-              <li><a>Home</a></li>
-              <li><a class="is-active">Projects</a></li>
-            </ul>
-          </aside>
+          <SidebarComponent />
         </div>
         <div class="column">
-          <project-component />
+          <ProjectComponent />
+          <ProjectComponent />
         </div>
       </div>
     </div>
@@ -24,11 +17,15 @@
 
 <script>
 import ProjectComponent from './components/ProjectComponent.vue'
+import NavbarComponent from './components/NavbarComponent.vue'
+import SidebarComponent from './components/SidebarComponent.vue'
 
 export default {
   name: 'App',
   components: {
-    ProjectComponent
+    ProjectComponent,
+    NavbarComponent,
+    SidebarComponent,
   }
 }
 </script>
