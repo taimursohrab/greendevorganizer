@@ -2,42 +2,46 @@ var express = require('express');
 const mongodb = require('mongodb');
 var router = express.Router();
 
-var Project = require('../models/Project.js');
+var Check = require('../models/Check.js');
 
-// GET: Get all Projects
-router.get('/', async(req, res) => {
+// GET: Get all Checks
+router.get('/', async (req, res) => {
   try{
-    res.send(await Project.find({}).populate('owner'));
+    res.send(await Check.find({}));
   }
   catch(err){
     res.status(404).send();
   }
 }); 
 
-// GET: Get a specific project by id
+// GET: Get a specific check by id
 router.get('/:id', async(req,res) => {
   try{
-    res.send(await Project.findOne({_id: new mongodb.ObjectID(req.params.id)}));
+    res.send(await Check.findOne({_id: new mongodb.ObjectID(req.params.id)}));
   }
   catch(err){
     res.status(404).send();
   }
 });
 
-// POST: Create a new Project
+// POST: Create a new Check
 router.post('/', async (req, res) => {
   try{
     // Create the new model, with parameters from req object
-    var newProject = new Project({
-        name : req.body.name,
-        owner: new mongodb.ObjectID(req.body.owner),
-        address : req.body.address,
-        desc: req.body.desc
+    var newCheck = new Check({
+      checkNum : req.body.checkNum,
+      amount : req.body.amount,
+      dateWritten : req.body.dateWritten,
+      datePosted : req.body.datePosted,
+      checkFrom : new mongodb.ObjectID(req.body.checkFrom),
+      checkTo : new mongodb.ObjectID(req.body.checkTo),
+      memo : req.body.memo,
+      notes : req.body.notes
     });
     // Persist the model to the database
-    await newProject.save(function (err, project) {
+    await newCheck.save(function (err, check) {
       if (err) res.status(400).send(err);
-      console.log(project + " saved to projects.");
+      console.log(check + " saved to checks.");
     }); 
     // Return 201 successful
     res.status(201).send();
@@ -47,7 +51,7 @@ router.post('/', async (req, res) => {
   }
 }); 
 
-// PUT: Update an existing project (by id)
+// PUT: Update an existing check (by id)
 router.put('/:id', async(req, res) => {
   try{
     // Package the updated parameters
@@ -57,8 +61,8 @@ router.put('/:id', async(req, res) => {
       address: req.body.address,
       desc: req.body.desc
     }
-    // Find and update the project
-    await Project.findOneAndUpdate({_id: req.params.id}, update);
+    // Find and update the check
+    await Check.findOneAndUpdate({_id: req.params.id}, update);
     // Return status 200 for success
     res.status(200).send();
   }
@@ -67,10 +71,10 @@ router.put('/:id', async(req, res) => {
   }
 }); 
 
-// DELETE: Delete an existing project (by id)
+// DELETE: Delete an existing check (by id)
 router.delete('/:id', async(req, res) => {
   try{
-    await Project.deleteOne({_id: new mongodb.ObjectID(req.params.id)});
+    await Check.deleteOne({_id: new mongodb.ObjectID(req.params.id)});
     res.status(200).send();
   }
   catch(err){

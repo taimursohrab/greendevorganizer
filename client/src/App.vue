@@ -1,17 +1,34 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="container">
+      <div class="columns">
+        <div class="column is-one-quarter">
+          <aside class="menu">
+            <p class="menu-label">
+              General
+            </p>
+            <ul class="menu-list">
+              <li><a>Home</a></li>
+              <li><a class="is-active">Projects</a></li>
+            </ul>
+          </aside>
+        </div>
+        <div class="column">
+          <project-component />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ProjectComponent from './components/ProjectComponent.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    ProjectComponent
   }
 }
 </script>
@@ -26,3 +43,4 @@ export default {
   margin-top: 60px;
 }
 </style>
+

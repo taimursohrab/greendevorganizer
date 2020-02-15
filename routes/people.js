@@ -2,42 +2,41 @@ var express = require('express');
 const mongodb = require('mongodb');
 var router = express.Router();
 
-var Project = require('../models/Project.js');
+var Person = require('../models/Person.js');
 
-// GET: Get all Projects
-router.get('/', async(req, res) => {
+// GET: Get all People
+router.get('/', async (req, res) => {
   try{
-    res.send(await Project.find({}).populate('owner'));
+    res.send(await Person.find({}));
   }
   catch(err){
     res.status(404).send();
   }
 }); 
 
-// GET: Get a specific project by id
+// GET: Get a specific person by id
 router.get('/:id', async(req,res) => {
   try{
-    res.send(await Project.findOne({_id: new mongodb.ObjectID(req.params.id)}));
+    res.send(await Person.findOne({_id: new mongodb.ObjectID(req.params.id)}));
   }
   catch(err){
     res.status(404).send();
   }
 });
 
-// POST: Create a new Project
+// POST: Create a new Person
 router.post('/', async (req, res) => {
   try{
     // Create the new model, with parameters from req object
-    var newProject = new Project({
+    var newPerson = new Person({
         name : req.body.name,
-        owner: new mongodb.ObjectID(req.body.owner),
-        address : req.body.address,
-        desc: req.body.desc
+        companies: req.body.companies,
+        phoneNumber : req.body.phoneNumber
     });
     // Persist the model to the database
-    await newProject.save(function (err, project) {
+    await newPerson.save(function (err, person) {
       if (err) res.status(400).send(err);
-      console.log(project + " saved to projects.");
+      console.log(person + " saved to people.");
     }); 
     // Return 201 successful
     res.status(201).send();
@@ -47,18 +46,17 @@ router.post('/', async (req, res) => {
   }
 }); 
 
-// PUT: Update an existing project (by id)
+// PUT: Update an existing person (by id)
 router.put('/:id', async(req, res) => {
   try{
     // Package the updated parameters
     const update = {
-      name: req.body.name,
-      owner: new mongodb.ObjectID(req.body.owner),
-      address: req.body.address,
-      desc: req.body.desc
+      name : req.body.name,
+      companies: req.body.companies,
+      phoneNumber : req.body.phoneNumber
     }
-    // Find and update the project
-    await Project.findOneAndUpdate({_id: req.params.id}, update);
+    // Find and update the person
+    await Person.findOneAndUpdate({_id: req.params.id}, update);
     // Return status 200 for success
     res.status(200).send();
   }
@@ -67,10 +65,10 @@ router.put('/:id', async(req, res) => {
   }
 }); 
 
-// DELETE: Delete an existing project (by id)
+// DELETE: Delete an existing person (by id)
 router.delete('/:id', async(req, res) => {
   try{
-    await Project.deleteOne({_id: new mongodb.ObjectID(req.params.id)});
+    await Person.deleteOne({_id: new mongodb.ObjectID(req.params.id)});
     res.status(200).send();
   }
   catch(err){

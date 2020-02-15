@@ -8,6 +8,8 @@ var mongoose = require("mongoose");
 var cors = require('cors');
 
 var projectsRouter = require('./routes/projects');
+var peopleRouter = require('./routes/people');
+var checksRouter = require('./routes/checks');
 
 // Database connection
 mongoose.connect('mongodb://localhost:27017/greendevorganizer', {useNewUrlParser: true, useUnifiedTopology: true});
@@ -33,6 +35,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //API Routes
 app.use('/projects', projectsRouter);
+app.use('/people', peopleRouter);
+app.use('/checks', checksRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

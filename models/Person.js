@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var personSchema = mongoose.Schema({
     name: String,
-    companies: [ {type : mongoose.Schema.ObjectId, ref : 'Company'} ],
+    companies: [ {type : mongoose.Schema.Types.ObjectId, ref : 'Company'} ],
     phoneNumber: String
 });
 
