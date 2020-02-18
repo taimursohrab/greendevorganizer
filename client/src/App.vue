@@ -1,14 +1,24 @@
 <template>
   <div id="app">
-    <NavbarComponent/>
     <div class="container">
+
       <div class="columns">
-        <div class="column is-one-quarter">
+        <div class="column is-one-fifth">
+          <figure class="image is-96x96 is-centered">
+            <img src="./assets/GDlogo.png" />
+          </figure>
+        </div>
+        <div class="column is-one-half">
+            <h1 class="title">Green Developers Organizer </h1>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column is-one-fifth">
           <SidebarComponent />
         </div>
         <div class="column">
-          <ProjectComponent />
-          <ProjectComponent />
+          <ProjectComponent v-if="screen === 1"/>
+          <ProjectViewComponent v-if="screen === 'viewProject'" v-bind:projectID="activeID"/>
         </div>
       </div>
     </div>
@@ -17,15 +27,21 @@
 
 <script>
 import ProjectComponent from './components/ProjectComponent.vue'
-import NavbarComponent from './components/NavbarComponent.vue'
 import SidebarComponent from './components/SidebarComponent.vue'
+import ProjectViewComponent from './components/ProjectViewComponent.vue'
 
 export default {
   name: 'App',
   components: {
     ProjectComponent,
-    NavbarComponent,
     SidebarComponent,
+    ProjectViewComponent
+  },
+  data(){
+    return {
+      screen: 0,
+      activeID : 0
+    }
   }
 }
 </script>
@@ -38,6 +54,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.is-clickable {
+  cursor: pointer;
 }
 </style>
 

@@ -1,11 +1,10 @@
 <template>
   <aside class="menu">
     <p class="menu-label">
-      General
+      Menu
     </p>
     <ul class="menu-list">
-      <li><a>Home</a></li>
-      <li><a class="is-active">Projects</a></li>
+      <li><a v-for="(item, index) in menuItems" v-bind:class="{'is-active': item.isActive}" v-bind:key="index" v-on:click="setActive(index)">{{ item.name }}</a></li>
     </ul>
   </aside>
 </template>
@@ -14,6 +13,28 @@
 
 export default {
   name: 'SidebarComponent',
+  data(){
+    return{
+      menuItems: [
+        {name: 'Home', isActive: true},
+        {name: 'Projects', isActive: false},
+        {name: 'Contracts', isActive: false},
+        {name: 'Payments', isActive: false}
+      ]
+    }
+  },
+  methods: {
+    setActive(i){
+      this.$parent.screen = i;
+      let items = this.menuItems.entries();
+      for (const [index,item] of items){
+        if (i === index){
+          item.isActive = true;
+        } 
+        else item.isActive = false;
+      }
+    }
+  }
 }
 </script>
 

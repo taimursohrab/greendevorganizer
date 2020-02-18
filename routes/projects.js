@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
 }); 
 
 // PUT: Update an existing project (by id)
-router.put('/:id', async(req, res) => {
+router.put('/', async(req, res) => {
   try{
     // Package the updated parameters
     const update = {
@@ -58,7 +58,7 @@ router.put('/:id', async(req, res) => {
       desc: req.body.desc
     }
     // Find and update the project
-    await Project.findOneAndUpdate({_id: req.params.id}, update);
+    await Project.findOneAndUpdate({_id: req.body._id}, update);
     // Return status 200 for success
     res.status(200).send();
   }

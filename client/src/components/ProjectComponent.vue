@@ -1,21 +1,25 @@
 <template>
+  <div>
+    <h1 class="title is-3"> Projects </h1>
 
-  <table class="table is-striped is-bordered is-fullwidth is-hoverable">
-    <thead>
-      <th>Project</th>
-      <th>Owner</th>
-      <th>Address </th>
-      <th>Description </th>
-    </thead>
-    <tbody>
-      <tr v-for="(project, index) in projects" v-bind:item="project" v-bind:index="index" v-bind:key="project.id">
-        <td>{{project.name}}</td>
-        <td>{{project.owner.name}}</td>
-        <td>{{project.address}}</td>
-        <td>{{project.desc}}</td>
-      </tr>
-    </tbody>
-  </table>
+    <table class="table is-bordered is-fullwidth is-hoverable is-narrow is-size-6">
+      <thead>
+        <th><p class="has-text-centered">Project</p></th>
+        <th><p class="has-text-centered">Owner</p></th>
+        <th><p class="has-text-centered">Address</p></th>
+        <th><p class="has-text-centered">Description</p></th>
+      </thead>
+      <tbody class="is-clickable is-size-7">
+        <tr v-for="(project, index) in projects" v-bind:item="project" v-bind:index="index" v-bind:key="project._id" v-on:click="viewProject(project._id)">
+          <td>{{project.name}}</td>
+          <td>{{project.owner.name}}</td>
+          <td>{{project.address}}</td>
+          <td>{{project.desc}}</td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
 
 
 </template>
@@ -37,11 +41,18 @@ export default {
     } catch(err){
       this.error = err.message;
     }
-  }
+  },
+  methods: {
+    viewProject(id){
+      console.log(id);
+      this.$parent.screen = 'viewProject';
+      this.$parent.activeID = id;
+    }
+  },
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style scoped>
 
 </style>
