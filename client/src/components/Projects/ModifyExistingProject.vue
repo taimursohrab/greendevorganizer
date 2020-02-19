@@ -64,9 +64,9 @@ import ProjectService from '../ProjectService';
 import PeopleService from '../PersonService';
 
 export default {
-    name: 'DetailedProjectComponent',
+    name: 'DetailedItemComponent',
     props: [
-        'projectID'
+        'itemID'
     ],
     data() {
         return {

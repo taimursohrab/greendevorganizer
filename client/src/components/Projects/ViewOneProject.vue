@@ -2,9 +2,9 @@
   <div>
     <div class="tabs">
       <ul>
-        <li class="is-active"><a>View All</a></li>
-        <li><a>Create New</a></li>
-        <li><a>Modify Existing</a></li>
+        <li class="is-active"><a>View Projects</a></li>
+        <li><a>Create New Project</a></li>
+        <li><a>Modify Existing Project</a></li>
       </ul>
     </div>
     <h1 class="title is-4"> Projects </h1>

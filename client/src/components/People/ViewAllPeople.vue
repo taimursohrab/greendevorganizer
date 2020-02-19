@@ -38,7 +38,7 @@
 import PersonService from '../PersonService';
 
 export default {
-  name: 'PersonComponent',
+  name: 'ViewPerson',
   data() {
     return {
       people: [],
