@@ -4,7 +4,7 @@
       Menu
     </p>
     <ul class="menu-list">
-      <li><a v-for="(item, index) in menuItems" v-bind:class="{'is-active': item.isActive}" v-bind:key="index" v-on:click="setActive(index)">{{ item.name }}</a></li>
+      <li><a v-for="(item, index) in menuItems" v-bind:class="{'is-active': item.isActive}" v-bind:key="index" v-on:click="$emit('changeView', index);setActive(index)">{{ item.name }}</a></li>
     </ul>
   </aside>
 </template>
@@ -26,19 +26,15 @@ export default {
         {name: 'People', isActive: false},
         {name: 'Companies', isActive: false},
         {name: 'Financial Roadmap', isActive: false}
-      ]
+      ],
+      activeItem: 0
     }
   },
   methods: {
     setActive(i){
-      this.$parent.screen = i;
-      let items = this.menuItems.entries();
-      for (const [index,item] of items){
-        if (i === index){
-          item.isActive = true;
-        } 
-        else item.isActive = false;
-      }
+      this.menuItems[this.activeItem].isActive = false;
+      this.menuItems[i].isActive = true;
+      this.activeItem = i;
     }
   }
 }

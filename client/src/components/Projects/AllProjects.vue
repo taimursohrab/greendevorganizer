@@ -1,14 +1,5 @@
 <template>
   <div>
-    <div class="tabs">
-      <ul>
-        <li class="is-active"><a>View Projects</a></li>
-        <li><a>Create New Project</a></li>
-        <li><a>Modify Existing Project</a></li>
-      </ul>
-    </div>
-    <h1 class="title is-4"> Projects </h1>
-
     <table class="table is-bordered is-fullwidth is-hoverable is-narrow is-size-6">
       <thead>
         <th><p class="has-text-centered">Project</p></th>
@@ -33,10 +24,10 @@
 </template>
 
 <script>
-import ProjectService from '../ProjectService';
+import ProjectService from '../../ProjectService';
 
 export default {
-  name: 'ViewAllProjects',
+  name: 'AllProjectsComponent',
   data() {
     return {
       projects: [],
@@ -46,7 +37,6 @@ export default {
   async created(){
     try{
       this.projects = await ProjectService.getProjects();
-      
     } catch(err){
       this.error = err.message;
     }

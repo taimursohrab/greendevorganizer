@@ -14,18 +14,19 @@
       </div>
       <div class="columns">
         <div class="column is-one-fifth">
-          <SidebarComponent />
+          <SidebarComponent v-on:changeView="changeView" />
         </div>
         <div class="column">
-          <HomeComponent v-if="viewConfig.screen === 0"/>
-          <ProjectComponent v-if="viewConfig.screen === 1"/>
-          <ContractsComponent v-if="viewConfig.screen === 2"/>
-          <InvoicesComponent v-if="viewConfig.screen === 3"/>
-          <IncomesComponent v-if="viewConfig.screen === 4"/>
-          <ExpensesComponent v-if="viewConfig.screen === 5"/>
-          <ChecksComponent v-if="viewConfig.screen === 6"/>
-          <PeopleComponent v-if="viewConfig.screen === 7"/>
-          <CompaniesComponent v-if="viewConfig.screen === 8"/>
+          <HomeComponent v-if="screen === 0"/>
+          <ProjectsComponent v-else-if="screen === 1"/>
+          <ContractsComponent v-else-if="screen === 2"/>
+          <InvoicesComponent v-else-if="screen === 3"/>
+          <IncomesComponent v-else-if="screen === 4"/>
+          <ExpensesComponent v-else-if="screen === 5"/>
+          <ChecksComponent v-else-if="screen === 6"/>
+          <PeopleComponent v-else-if="screen === 7"/>
+          <CompaniesComponent v-else-if="screen === 8"/>
+          <financial-roadmap-component v-else/>
         </div>
       </div>
     </div>
@@ -35,15 +36,15 @@
 <script>
 import SidebarComponent from './components/SidebarComponent.vue'
 import HomeComponent from './components/HomeComponent.vue'
-import ProjectsComponent from './components/ProjectsComponent.vue'
-import ContractsComponent from './components/ContractsComponent.vue'
-import InvoicesComponent from './components/InvoicesComponent.vue'
-import IncomesComponent from './components/IncomesComponent.vue'
-import ExpensesComponent from './components/ExpensesComponent.vue'
-import ChecksComponent from './components/ChecksComponent.vue'
-import PeopleComponent from './components/PeopleComponent.vue'
-import CompaniesComponent from './components/CompaniesComponent.vue'
-import FinancialRoadmapComponent from './components/FinancialRoadmapComponent.vue'
+import ProjectsComponent from './components/Projects/Main.vue'
+import ContractsComponent from './components/Contracts/Main.vue'
+import InvoicesComponent from './components/Invoices/Main.vue'
+import IncomesComponent from './components/Incomes/Main.vue'
+import ExpensesComponent from './components/Expenses/Main.vue'
+import ChecksComponent from './components/Checks/Main.vue'
+import PeopleComponent from './components/People/Main.vue'
+import CompaniesComponent from './components/Companies/Main.vue'
+import FinancialRoadmapComponent from './components/FinancialRoadmap/Main.vue'
 
 export default {
   name: 'App',
@@ -62,14 +63,12 @@ export default {
   },
   data(){
     return {
-      viewConfig: {screen: '', tab: '', activeProjectId: 0};
+      screen : 0
     }
   },
   methods: {
-    changeView(screen, tab, id){
-      this.viewConfig.screen = screen;
-      this.viewConfig.tab = tab;
-      this.viewConfig.activeProjectId = id;
+    changeView(screen){
+      if (screen != undefined) this.screen = screen;
     }
   }
 }
