@@ -5,10 +5,15 @@ var checkSchema = mongoose.Schema({
     amount : Number,
     dateWritten : Date,
     datePosted : Date,
-    checkFrom : mongoose.Types.ObjectId,
-    checkTo : mongoose.Types.ObjectId,
+    checkFrom : {type : mongoose.Schema.Types.ObjectId, refPath : 'entityModel'},
+    checkTo : {type : mongoose.Schema.Types.ObjectId, refPath : 'entityModel'},
     memo : String,
-    notes : String
+    notes : String,
+    imageURL : String,
+    entityModel: {
+        type: String,
+        enum: ['Person', 'Company']
+    }
 });
 
 module.exports = mongoose.model('Check', checkSchema);

@@ -1,5 +1,12 @@
 <template>
     <div>
+        <div class="tabs">
+            <ul>
+                <li><a>View All</a></li>
+                <li><a>Create New</a></li>
+                <li class="is-active"><a>Modify Existing</a></li>
+            </ul>
+        </div>
         <h1 class="title">Update Project </h1>
         <div class="columns">
             <div class="column is-one-fifth">
@@ -35,11 +42,16 @@
                         <p>Project Owner: </p>
                     </div>
                     <div class="column">
-                        <input class="input" type="text" v-model="project.owner.name"/>
+                        <div class="select">
+                            <select v-model="selectedPersonId">
+                                <option v-bind:value="null"> None </option>
+                                <option v-for="(person) in people" v-bind:key="person._id" v-bind:value="person._id"> {{person.name}}</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                     
-                    <button class="button" v-on:click="updateModel()">Update Record </button>
+                    <button class="button" v-on:click="updateModel()">Update Project </button>
                     <p class="has-text-primary" v-if="updateSuccess">Update successful!</p>
                 
             </div>
@@ -49,21 +61,25 @@
 
 <script>
 import ProjectService from '../ProjectService';
+import PeopleService from '../PersonService';
 
 export default {
-    name: 'ProjectViewComponent',
+    name: 'DetailedProjectComponent',
     props: [
         'projectID'
     ],
     data() {
         return {
             project: {},
+            people: [],
+            selectedPersonId : '',
             updateSuccess: false
         }
     },
     methods: {
         async updateModel(){
             try{
+                this.project.owner = this.selectedPersonId;
                 await ProjectService.updateProject(this.project);
                 this.displaySuccess();
             } catch(err){
@@ -91,6 +107,7 @@ export default {
     async created(){
         try{
             this.project = await ProjectService.getProject(this.projectID);
+            this.people = await PeopleService.getPeople();
         } catch(err){
             this.error = err.message;
         }

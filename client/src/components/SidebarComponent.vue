@@ -19,7 +19,13 @@ export default {
         {name: 'Home', isActive: true},
         {name: 'Projects', isActive: false},
         {name: 'Contracts', isActive: false},
-        {name: 'Payments', isActive: false}
+        {name: 'Invoices', isActive: false},
+        {name: 'Incomes', isActive: false},
+        {name: 'Expenses', isActive: false},
+        {name: 'Checks', isActive: false},
+        {name: 'People', isActive: false},
+        {name: 'Companies', isActive: false},
+        {name: 'Financial Roadmap', isActive: false}
       ]
     }
   },

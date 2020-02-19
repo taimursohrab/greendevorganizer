@@ -8,16 +8,18 @@ var Person = require('../models/Person.js');
 router.get('/', async (req, res) => {
   try{
     res.send(await Person.find({}));
+    
   }
   catch(err){
     res.status(404).send();
+    console.log('thathappened it failed')
   }
 }); 
 
 // GET: Get a specific person by id
 router.get('/:id', async(req,res) => {
   try{
-    res.send(await Person.findOne({_id: new mongodb.ObjectID(req.params.id)}));
+    res.send(await Person.findOne({_id: new mongodb.ObjectID(req.params.id)}.populate('companies')));
   }
   catch(err){
     res.status(404).send();
@@ -47,7 +49,7 @@ router.post('/', async (req, res) => {
 }); 
 
 // PUT: Update an existing person (by id)
-router.put('/:id', async(req, res) => {
+router.put('/', async(req, res) => {
   try{
     // Package the updated parameters
     const update = {
@@ -56,7 +58,7 @@ router.put('/:id', async(req, res) => {
       phoneNumber : req.body.phoneNumber
     }
     // Find and update the person
-    await Person.findOneAndUpdate({_id: req.params.id}, update);
+    await Person.findOneAndUpdate({_id: req.body._id}, update);
     // Return status 200 for success
     res.status(200).send();
   }

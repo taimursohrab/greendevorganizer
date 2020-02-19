@@ -7,7 +7,7 @@ var Check = require('../models/Check.js');
 // GET: Get all Checks
 router.get('/', async (req, res) => {
   try{
-    res.send(await Check.find({}));
+    res.send(await Check.find({}).populate('checkFrom').populate('checkTo'));
   }
   catch(err){
     res.status(404).send();
@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
 // GET: Get a specific check by id
 router.get('/:id', async(req,res) => {
   try{
-    res.send(await Check.findOne({_id: new mongodb.ObjectID(req.params.id)}));
+    res.send(await Check.findOne({_id: new mongodb.ObjectID(req.params.id)}.populate('checkFrom').populate('checkTo')));
   }
   catch(err){
     res.status(404).send();
@@ -36,7 +36,8 @@ router.post('/', async (req, res) => {
       checkFrom : new mongodb.ObjectID(req.body.checkFrom),
       checkTo : new mongodb.ObjectID(req.body.checkTo),
       memo : req.body.memo,
-      notes : req.body.notes
+      notes : req.body.notes,
+      imageURL : req.body.imageURL
     });
     // Persist the model to the database
     await newCheck.save(function (err, check) {
@@ -52,17 +53,22 @@ router.post('/', async (req, res) => {
 }); 
 
 // PUT: Update an existing check (by id)
-router.put('/:id', async(req, res) => {
+router.put('/', async(req, res) => {
   try{
     // Package the updated parameters
     const update = {
-      name: req.body.name,
-      owner: new mongodb.ObjectID(req.body.owner),
-      address: req.body.address,
-      desc: req.body.desc
+      checkNum : req.body.checkNum,
+      amount : req.body.amount,
+      dateWritten : req.body.dateWritten,
+      datePosted : req.body.datePosted,
+      checkFrom : new mongodb.ObjectID(req.body.checkFrom),
+      checkTo : new mongodb.ObjectID(req.body.checkTo),
+      memo : req.body.memo,
+      notes : req.body.notes,
+      imageURL : req.body.imageURL
     }
     // Find and update the check
-    await Check.findOneAndUpdate({_id: req.params.id}, update);
+    await Check.findOneAndUpdate({_id: req.body._id}, update);
     // Return status 200 for success
     res.status(200).send();
   }

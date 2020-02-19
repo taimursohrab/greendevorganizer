@@ -17,7 +17,7 @@ router.get('/', async(req, res) => {
 // GET: Get a specific project by id
 router.get('/:id', async(req,res) => {
   try{
-    res.send(await Project.findOne({_id: new mongodb.ObjectID(req.params.id)}));
+    res.send(await (await Project.findOne({_id: new mongodb.ObjectID(req.params.id)}).populate('owner')));
   }
   catch(err){
     res.status(404).send();
