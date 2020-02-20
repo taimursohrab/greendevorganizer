@@ -10,8 +10,8 @@
 </template>
 
 <script>
-    import ProjectService from '../../ProjectService';
-    import PeopleService from '../../PersonService';
+    import ProjectService from '../../services/ProjectService';
+    import PeopleService from '../../services/PersonService';
 
     export default {
         name: 'ProjectDetailsComponent',

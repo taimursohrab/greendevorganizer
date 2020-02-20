@@ -3,10 +3,10 @@
     <input class="input" placeholder="search..." v-model="searchText" type="text"/>
     <div class="columns is-multiline">
       <div class="column is-one-third" v-for="(project, index) in filteredProjects" v-bind:item="project" v-bind:index="index" v-bind:key="project._id">
-        <div class="card is-clickable has-background-white-bis" v-on:click="setActiveProject(project._id)">
+        <div class="card is-clickable has-background-white-bis" >
           <button class="delete is-small is-pulled-right" v-on:click="deleteProject(project._id)"></button>
-          <div class="card-content">
-            <p class="title is-6">
+          <div class="card-content" v-on:click="setActiveProject(project._id)">
+            <p class="title is-5">
               {{project.name}}
             </p>
             <hr>
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import ProjectService from '../../ProjectService';
+import ProjectService from '../../services/ProjectService';
 
 export default {
   name: 'AllProjectsComponent',
@@ -62,7 +62,8 @@ export default {
       }
     },
     setActiveProject(id){
-      this.$emit('changeActiveProject',id);
+      this.$parent.activeProjectId = id;
+      this.$emit('changeTab',1);
     }
   },
   computed: {

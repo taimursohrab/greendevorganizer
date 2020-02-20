@@ -5,9 +5,9 @@
                 <li v-for="(tab, index) in tabs" v-bind:key="index" v-bind:class="{'is-active': tab.isActive}"><a v-on:click="changeTab(index)">{{ tab.name }}</a></li>
             </ul>
         </div>
-        <AllPeopleComponent v-if="activeTabIndex === 0"/>
-        <PersonDetailsComponent v-if="activeTabIndex === 1"/>
-        <CreateNewPersonComponent v-if="activeTabIndex === 2"/>
+        <AllPeopleComponent v-if="activeTabIndex === 0" v-on:changeTab="changeTab"/>
+        <PersonDetailsComponent v-if="activeTabIndex === 1" v-bind:activePersonId="activePersonId"/>
+        <CreateNewPersonComponent v-if="activeTabIndex === 2" v-on:changeTab="changeTab"/>
     </div>
 </template>
 
@@ -25,7 +25,8 @@ import CreateNewPersonComponent from './CreateNew.vue'
                     {name: 'Person Details', isActive: false},
                     {name: 'Create New Person', isActive: false},
                 ],
-                activeTabIndex: 0
+                activeTabIndex: 0,
+                activePersonId: 0
             }
         },
         components:{

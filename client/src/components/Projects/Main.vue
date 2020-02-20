@@ -5,9 +5,9 @@
                 <li v-for="(tab, index) in tabs" v-bind:key="index" v-bind:class="{'is-active': tab.isActive}"><a v-on:click="changeTab(index)">{{ tab.name }}</a></li>
             </ul>
         </div>
-        <AllProjectsComponent v-if="activeTabIndex === 0"/>
+        <AllProjectsComponent v-if="activeTabIndex === 0" v-on:changeTab="changeTab"/>
         <ProjectDetailsComponent v-if="activeTabIndex === 1" v-bind:activeProjectId="activeProjectId"/>
-        <CreateNewProjectComponent v-if="activeTabIndex === 2"/>
+        <CreateNewProjectComponent v-if="activeTabIndex === 2" v-on:changeTab="changeTab"/>
     </div>
 </template>
 
@@ -26,7 +26,7 @@ import CreateNewProjectComponent from './CreateNew.vue'
                     {name: 'Create New Project', isActive: false},
                 ],
                 activeTabIndex: 0,
-                activeProjectId: ''
+                activeProjectId: 0
             }
         },
         components:{
@@ -42,9 +42,6 @@ import CreateNewProjectComponent from './CreateNew.vue'
                 this.tabs[this.activeTabIndex].isActive = false;
                 this.tabs[i].isActive = true;
                 this.activeTabIndex = i;
-            },
-            changeActiveProject(id){
-                this.activeProjectId = id;
             }
         }
     }
