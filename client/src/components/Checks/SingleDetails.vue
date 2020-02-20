@@ -1,5 +1,5 @@
 <template>
-    <h1>This is the check details component </h1>
+    <h1>This is the Check details component </h1>
 </template>
 
 <script>

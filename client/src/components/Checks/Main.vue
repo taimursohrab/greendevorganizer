@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import AllChecksComponent from './AllChecks.vue'
-import CheckDetailsComponent from './CheckDetails.vue'
-import CreateNewCheckComponent from './CreateNewCheck.vue'
+import AllChecksComponent from './ListAll.vue'
+import CheckDetailsComponent from './SingleDetails.vue'
+import CreateNewCheckComponent from './CreateNew.vue'
 
     export default {
         name: 'ChecksComponent',

@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import AllProjectsComponent from './AllProjects.vue'
-import ProjectDetailsComponent from './ProjectDetails.vue'
-import CreateNewProjectComponent from './CreateNewProject.vue'
+import AllProjectsComponent from './ListAll.vue'
+import ProjectDetailsComponent from './SingleDetails.vue'
+import CreateNewProjectComponent from './CreateNew.vue'
 
     export default {
         name: 'ProjectsComponent',

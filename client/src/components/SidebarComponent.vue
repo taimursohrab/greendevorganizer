@@ -42,5 +42,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-
+  .menu{
+    margin-top: 34px;
+  }
 </style>

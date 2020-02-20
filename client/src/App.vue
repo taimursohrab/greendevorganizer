@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <div class="container">
-
       <div class="columns">
         <div class="column is-one-fifth">
           <figure class="image is-96x96 is-centered">
@@ -29,6 +28,7 @@
           <financial-roadmap-component v-else/>
         </div>
       </div>
+      <FooterComponent />
     </div>
   </div>
 </template>
@@ -45,6 +45,7 @@ import ChecksComponent from './components/Checks/Main.vue'
 import PeopleComponent from './components/People/Main.vue'
 import CompaniesComponent from './components/Companies/Main.vue'
 import FinancialRoadmapComponent from './components/FinancialRoadmap/Main.vue'
+import FooterComponent from './components/FooterComponent.vue'
 
 export default {
   name: 'App',
@@ -59,7 +60,8 @@ export default {
     ChecksComponent,
     PeopleComponent,
     CompaniesComponent,
-    FinancialRoadmapComponent
+    FinancialRoadmapComponent,
+    FooterComponent
   },
   data(){
     return {
@@ -86,5 +88,6 @@ export default {
 .is-clickable {
   cursor: pointer;
 }
+
 </style>
 
