@@ -3,7 +3,7 @@
     <input class="input" placeholder="search..." v-model="searchText" type="text"/>
     <div class="columns is-multiline">
       <div class="column is-one-third" v-for="(project, index) in filteredProjects" v-bind:item="project" v-bind:index="index" v-bind:key="project._id">
-        <div class="card is-clickable has-background-white-bis" >
+        <div class="card is-clickable has-background-white-bis" v-on:click="setActiveProject(project._id)">
           <button class="delete is-small is-pulled-right" v-on:click="deleteProject(project._id)"></button>
           <div class="card-content">
             <p class="title is-6">
@@ -60,6 +60,9 @@ export default {
       } catch(err){
         this.error = err.message;
       }
+    },
+    setActiveProject(id){
+      this.$emit('changeActiveProject',id);
     }
   },
   computed: {

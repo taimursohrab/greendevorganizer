@@ -6,7 +6,7 @@
             </ul>
         </div>
         <AllProjectsComponent v-if="activeTabIndex === 0"/>
-        <ProjectDetailsComponent v-if="activeTabIndex === 1"/>
+        <ProjectDetailsComponent v-if="activeTabIndex === 1" v-bind:activeProjectId="activeProjectId"/>
         <CreateNewProjectComponent v-if="activeTabIndex === 2"/>
     </div>
 </template>
@@ -25,7 +25,8 @@ import CreateNewProjectComponent from './CreateNew.vue'
                     {name: 'Project Details', isActive: false},
                     {name: 'Create New Project', isActive: false},
                 ],
-                activeTabIndex: 0
+                activeTabIndex: 0,
+                activeProjectId: ''
             }
         },
         components:{
@@ -41,6 +42,9 @@ import CreateNewProjectComponent from './CreateNew.vue'
                 this.tabs[this.activeTabIndex].isActive = false;
                 this.tabs[i].isActive = true;
                 this.activeTabIndex = i;
+            },
+            changeActiveProject(id){
+                this.activeProjectId = id;
             }
         }
     }
