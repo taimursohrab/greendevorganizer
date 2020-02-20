@@ -4,7 +4,7 @@
     <div class="columns is-multiline">
       <div class="column is-one-third" v-for="(project, index) in filteredProjects" v-bind:item="project" v-bind:index="index" v-bind:key="project._id">
         <div class="card is-clickable has-background-white-bis" >
-          <button class="delete is-small is-pulled-right" v-on:click="click"></button>
+          <button class="delete is-small is-pulled-right" v-on:click="deleteProject(project._id)"></button>
           <div class="card-content">
             <p class="title is-6">
               {{project.name}}
@@ -53,8 +53,13 @@ export default {
     }
   },
   methods: {
-    click(){
-
+    async deleteProject(id){
+      try{
+        await ProjectService.deleteProject(id);
+        this.projects = await ProjectService.getProjects();
+      } catch(err){
+        this.error = err.message;
+      }
     }
   },
   computed: {
