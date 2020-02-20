@@ -1,9 +1,10 @@
 <template>
   <div>
-    <input class="input" placeholder="search..." type="text"/>
+    <input class="input" placeholder="search..." v-model="searchText" type="text"/>
     <div class="columns is-multiline">
-      <div class="column is-one-third" v-for="(project, index) in projects" v-bind:item="project" v-bind:index="index" v-bind:key="project._id">
-        <div class="card is-clickable has-background-white-bis" v-on:click="viewProject(project._id)">
+      <div class="column is-one-third" v-for="(project, index) in filteredProjects" v-bind:item="project" v-bind:index="index" v-bind:key="project._id">
+        <div class="card is-clickable has-background-white-bis" >
+          <button class="delete is-small is-pulled-right"></button>
           <div class="card-content">
             <p class="title is-6">
               {{project.name}}
@@ -23,6 +24,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="column has-text-centered noResults" v-if="filteredProjects.length == 0">
+        <p>No Results Found </p>
       </div>
     </div>
   </div>
@@ -57,7 +61,8 @@ export default {
   data() {
     return {
       projects: [],
-      error : ''
+      error : '',
+      searchText: ''
     }
   },
   async created(){
@@ -65,6 +70,25 @@ export default {
       this.projects = await ProjectService.getProjects();
     } catch(err){
       this.error = err.message;
+    }
+  },
+  computed: {
+    filteredProjects: function () {
+      let regExp = RegExp(this.searchText+ '','i');
+      const result = this.projects.filter(project => {
+        if (project.name.match(regExp)) return true;
+        if (project.owner) {
+          if(project.owner.name.match(regExp)) return true;
+        }
+        if (project.address){
+          if(project.address.match(regExp)) return true;
+        } 
+        if (project.desc){
+          if(project.desc.match(regExp)) return true;
+        } 
+        return false;
+      });
+      return result;
     }
   }
 }
@@ -80,5 +104,20 @@ export default {
   }
   .has-text-centered{
     margin-bottom:10px;
+  }
+  .noResults{
+    margin-top:30px;
+  }
+  .delete{
+    margin-top:5px;
+    margin-right:5px;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 300ms, opacity 300ms;
+  }
+  .card:hover .delete{
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 0s, opacity 300ms;
   }
 </style>
