@@ -4,7 +4,7 @@
     <div class="columns is-multiline">
       <div class="column is-one-third" v-for="(project, index) in filteredProjects" v-bind:item="project" v-bind:index="index" v-bind:key="project._id">
         <div class="card is-clickable has-background-white-bis" >
-          <button class="delete is-small is-pulled-right"></button>
+          <button class="delete is-small is-pulled-right" v-on:click="click"></button>
           <div class="card-content">
             <p class="title is-6">
               {{project.name}}
@@ -31,26 +31,6 @@
     </div>
   </div>
 
-<!-- 
-    <table class="table is-bordered is-fullwidth is-hoverable is-narrow is-size-6">
-      <thead>
-        <th><p class="has-text-centered">Project</p></th>
-        <th><p class="has-text-centered">Owner</p></th>
-        <th><p class="has-text-centered">Address</p></th>
-        <th><p class="has-text-centered">Description</p></th>
-      </thead>
-      <tbody class="is-clickable is-size-7">
-        <tr v-for="(project, index) in projects" v-bind:item="project" v-bind:index="index" v-bind:key="project._id" v-on:click="viewProject(project._id)">
-          <td>{{project.name}}</td>
-          <td v-if="project.owner">{{project.owner.name}}</td>
-          <td v-else>No Owner</td>
-          <td>{{project.address}}</td>
-          <td>{{project.desc}}</td>
-        </tr>
-      </tbody>
-
-    </table> -->
-
 </template>
 
 <script>
@@ -70,6 +50,11 @@ export default {
       this.projects = await ProjectService.getProjects();
     } catch(err){
       this.error = err.message;
+    }
+  },
+  methods: {
+    click(){
+
     }
   },
   computed: {
