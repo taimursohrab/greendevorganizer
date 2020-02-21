@@ -6,14 +6,14 @@
             </ul>
         </div>
         <AllProjectsComponent v-if="activeTabIndex === 0" v-on:changeTab="changeTab"/>
-        <ProjectDetailsComponent v-if="activeTabIndex === 1" v-bind:activeProjectId="activeProjectId"/>
+        <SingleProjectDetailsComponent v-if="activeTabIndex === 1" v-on:changeTab="changeTab" v-bind:activeProjectId="activeProjectId"/>
         <CreateNewProjectComponent v-if="activeTabIndex === 2" v-on:changeTab="changeTab"/>
     </div>
 </template>
 
 <script>
 import AllProjectsComponent from './ListAll.vue'
-import ProjectDetailsComponent from './SingleDetails.vue'
+import SingleProjectDetailsComponent from './SingleDetails.vue'
 import CreateNewProjectComponent from './CreateNew.vue'
 
     export default {
@@ -31,7 +31,7 @@ import CreateNewProjectComponent from './CreateNew.vue'
         },
         components:{
             AllProjectsComponent,
-            ProjectDetailsComponent,
+            SingleProjectDetailsComponent,
             CreateNewProjectComponent
         },
         created(){

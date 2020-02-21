@@ -4,7 +4,8 @@
     <div class="columns is-multiline">
       <div class="column is-one-third" v-for="(project, index) in filteredProjects" v-bind:item="project" v-bind:index="index" v-bind:key="project._id">
         <div class="card is-clickable has-background-white-bis" >
-          <button class="delete is-small is-pulled-right" v-on:click="deleteProject(project._id)"></button>
+          <div class="editicon is-pulled-left" v-on:click="toggleEditProjectModal(project._id,true)"><i class="far fa-edit"></i></div>
+          <div class="is-pulled-right"><button class="delete is-small" v-on:click="deleteProject(project._id)"></button></div>
           <div class="card-content" v-on:click="setActiveProject(project._id)">
             <p class="title is-5">
               {{project.name}}
@@ -29,20 +30,29 @@
         <p>No Results Found </p>
       </div>
     </div>
+
+    <EditProjectComponent v-if="modalIsActive" v-bind:class="{'is-active':modalIsActive}" v-bind:activeProjectId="activeProjectId" v-on:closeModal="toggleEditProjectModal(0,false)" />
+
   </div>
 
 </template>
 
 <script>
 import ProjectService from '../../services/ProjectService';
+import EditProjectComponent from './Edit.vue';
 
 export default {
   name: 'AllProjectsComponent',
+  components:{
+    EditProjectComponent
+  },
   data() {
     return {
       projects: [],
       error : '',
-      searchText: ''
+      searchText: '',
+      modalIsActive: false,
+      activeProjectId: false
     }
   },
   async created(){
@@ -62,8 +72,21 @@ export default {
       }
     },
     setActiveProject(id){
-      this.$parent.activeProjectId = id;
+      this.activeProjectId = id;
       this.$emit('changeTab',1);
+    },
+    //toggles the edit project modal
+    async toggleEditProjectModal(id,opened){
+
+      this.activeProjectId = id;
+      if (opened == false){
+        try{
+          this.projects = await ProjectService.getProjects();
+        } catch(err){
+          this.error = err.message;
+        }
+      }
+      this.modalIsActive = opened;
     }
   },
   computed: {
@@ -110,6 +133,18 @@ export default {
     transition: visibility 0s linear 300ms, opacity 300ms;
   }
   .card:hover .delete{
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 0s, opacity 300ms;
+  }
+  .editicon{
+    padding-top:1px;
+    margin-left:7px;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 300ms, opacity 300ms;
+  }
+  .card:hover .editicon{
     visibility: visible;
     opacity: 1;
     transition: visibility 0s linear 0s, opacity 300ms;
