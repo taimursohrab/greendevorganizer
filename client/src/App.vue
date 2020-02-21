@@ -20,11 +20,10 @@
           <ProjectsComponent v-else-if="screen === 1"/>
           <ContractsComponent v-else-if="screen === 2"/>
           <InvoicesComponent v-else-if="screen === 3"/>
-          <IncomesComponent v-else-if="screen === 4"/>
-          <ExpensesComponent v-else-if="screen === 5"/>
-          <ChecksComponent v-else-if="screen === 6"/>
-          <PeopleComponent v-else-if="screen === 7"/>
-          <CompaniesComponent v-else-if="screen === 8"/>
+          <PaymentsComponent v-else-if="screen === 4"/>
+          <ChecksComponent v-else-if="screen === 5"/>
+          <PeopleComponent v-else-if="screen === 6"/>
+          <CompaniesComponent v-else-if="screen === 7"/>
           <financial-roadmap-component v-else/>
         </div>
       </div>
@@ -39,8 +38,7 @@ import HomeComponent from './components/HomeComponent.vue'
 import ProjectsComponent from './components/Projects/Main.vue'
 import ContractsComponent from './components/Contracts/Main.vue'
 import InvoicesComponent from './components/Invoices/Main.vue'
-import IncomesComponent from './components/Incomes/Main.vue'
-import ExpensesComponent from './components/Expenses/Main.vue'
+import PaymentsComponent from './components/Payments/Main.vue'
 import ChecksComponent from './components/Checks/Main.vue'
 import PeopleComponent from './components/People/Main.vue'
 import CompaniesComponent from './components/Companies/Main.vue'
@@ -55,8 +53,7 @@ export default {
     ProjectsComponent,
     ContractsComponent,
     InvoicesComponent,
-    IncomesComponent,
-    ExpensesComponent,
+    PaymentsComponent,
     ChecksComponent,
     PeopleComponent,
     CompaniesComponent,

@@ -5,9 +5,9 @@
                 <li v-for="(tab, index) in tabs" v-bind:key="index" v-bind:class="{'is-active': tab.isActive}"><a v-on:click="changeTab(index)">{{ tab.name }}</a></li>
             </ul>
         </div>
-        <AllCompaniesComponent v-if="activeTabIndex === 0"/>
+        <AllCompaniesComponent v-if="activeTabIndex === 0" v-on:changeTab="changeTab"/>
         <CompanyDetailsComponent v-if="activeTabIndex === 1"/>
-        <CreateNewCompanyComponent v-if="activeTabIndex === 2"/>
+        <CreateNewCompanyComponent v-if="activeTabIndex === 2" v-on:changeTab="changeTab"/>
     </div>
 </template>
 

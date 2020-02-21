@@ -4,6 +4,7 @@ var companySchema = mongoose.Schema({
     name: String,
     address: String,
     phoneNumber: String,
+    desc: String,
     employees: [ {type : mongoose.Schema.ObjectId, ref : 'Person'} ]
 });
 

@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var projectSchema = mongoose.Schema({
     name: String,
-    owner: {type: mongoose.Schema.Types.ObjectId, ref: 'Person'},         //person or company that owns the project
+    owner: {type: mongoose.Schema.Types.ObjectId, ref: 'Person'},         //person that owns the project
     address: String,
     desc: String,
 });

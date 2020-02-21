@@ -31,13 +31,13 @@ router.post('/', async (req, res) => {
     var newCheck = new Check({
       checkNum : req.body.checkNum,
       amount : req.body.amount,
-      dateWritten : req.body.dateWritten,
-      datePosted : req.body.datePosted,
+      dateWritten : new Date(req.body.dateWritten),
+      datePosted : new Date(req.body.datePosted),
       checkFrom : new mongodb.ObjectID(req.body.checkFrom),
       checkTo : new mongodb.ObjectID(req.body.checkTo),
       memo : req.body.memo,
       notes : req.body.notes,
-      imageURL : req.body.imageURL
+      imageURL : req.body.imageURL,
     });
     // Persist the model to the database
     await newCheck.save(function (err, check) {
@@ -59,13 +59,13 @@ router.put('/', async(req, res) => {
     const update = {
       checkNum : req.body.checkNum,
       amount : req.body.amount,
-      dateWritten : req.body.dateWritten,
-      datePosted : req.body.datePosted,
+      dateWritten : new Date(req.body.dateWritten),
+      datePosted : new Date(req.body.datePosted),
       checkFrom : new mongodb.ObjectID(req.body.checkFrom),
       checkTo : new mongodb.ObjectID(req.body.checkTo),
       memo : req.body.memo,
       notes : req.body.notes,
-      imageURL : req.body.imageURL
+      imageURL : req.body.imageURL,
     }
     // Find and update the check
     await Check.findOneAndUpdate({_id: req.body._id}, update);

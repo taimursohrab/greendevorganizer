@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const url = 'http://localhost:4000/expenses/';
+const url = 'http://localhost:4000/payment/';
 
-class ExpenseService {
+class PaymentService {
 
-    // Get a specific Expense
-    static getExpense(id) {
+    // Get a specific Payment
+    static getPayment(id) {
 
         return new Promise ((resolve,reject) => {
             axios.get(`${url}${id}`).then((res) => {
@@ -20,15 +20,15 @@ class ExpenseService {
         });
     }
 
-    // Get All Expenses
-    static getExpenses() {
+    // Get All Payments
+    static getPayments() {
         return new Promise ((resolve,reject) => {
             axios.get(url).then((res) => {
                 const data = res.data;
                 resolve(
-                    data.map(expense => ({
-                        ...expense
-                        //createdAt: new Date(expense.createdAt)
+                    data.map(payment => ({
+                        ...payment
+                        //createdAt: new Date(payment.createdAt)
                     }))
                 );
             })
@@ -38,20 +38,20 @@ class ExpenseService {
         });
     }
 
-    // Create Expense
-    static insertExpense(expense){
-        return axios.post(url, expense);
+    // Create Payment
+    static insertPayment(payment){
+        return axios.post(url, payment);
     }
 
-    // Update Expense
-    static updateExpense(expense){
-        return axios.put(url, expense);
+    // Update Payment
+    static updatePayment(payment){
+        return axios.put(url, payment);
     }
 
-    // Delete Expense
-    static deleteExpense(id) {
+    // Delete Payment
+    static deletePayment(id) {
         return axios.delete(`${url}${id}`);
     }
 }
 
-export default ExpenseService;
+export default PaymentService;

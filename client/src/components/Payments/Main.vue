@@ -5,33 +5,33 @@
                 <li v-for="(tab, index) in tabs" v-bind:key="index" v-bind:class="{'is-active': tab.isActive}"><a v-on:click="changeTab(index)">{{ tab.name }}</a></li>
             </ul>
         </div>
-        <AllIncomesComponent v-if="activeTabIndex === 0"/>
-        <IncomeDetailsComponent v-if="activeTabIndex === 1"/>
-        <CreateNewIncomeComponent v-if="activeTabIndex === 2"/>
+        <AllPaymentsComponent v-if="activeTabIndex === 0"/>
+        <PaymentDetailsComponent v-if="activeTabIndex === 1"/>
+        <CreateNewPaymentComponent v-if="activeTabIndex === 2"/>
     </div>
 </template>
 
 <script>
-import AllIncomesComponent from './ListAll.vue'
-import IncomeDetailsComponent from './SingleDetails.vue'
-import CreateNewIncomeComponent from './CreateNew.vue'
+import AllPaymentsComponent from './ListAll.vue'
+import PaymentDetailsComponent from './SingleDetails.vue'
+import CreateNewPaymentComponent from './CreateNew.vue'
 
     export default {
-        name: 'IncomesComponent',
+        name: 'PaymentsComponent',
         data(){
             return{      
                 tabs: [
-                    {name: 'All Incomes', isActive: true},
-                    {name: 'Income Details', isActive: false},
-                    {name: 'Create New Income', isActive: false},
+                    {name: 'All Payments', isActive: true},
+                    {name: 'Payment Details', isActive: false},
+                    {name: 'Create New Payment', isActive: false},
                 ],
                 activeTabIndex: 0
             }
         },
         components:{
-            AllIncomesComponent,
-            IncomeDetailsComponent,
-            CreateNewIncomeComponent
+            AllPaymentsComponent,
+            PaymentDetailsComponent,
+            CreateNewPaymentComponent
         },
         created(){
             this.activeTabIndex = 0;

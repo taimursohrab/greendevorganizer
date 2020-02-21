@@ -12,7 +12,6 @@ router.get('/', async (req, res) => {
   }
   catch(err){
     res.status(404).send();
-    console.log('thathappened it failed')
   }
 }); 
 
@@ -32,8 +31,8 @@ router.post('/', async (req, res) => {
     // Create the new model, with parameters from req object
     var newPerson = new Person({
         name : req.body.name,
-        companies: req.body.companies,
-        phoneNumber : req.body.phoneNumber
+        phoneNumber : req.body.phoneNumber,
+        desc : req.body.desc
     });
     // Persist the model to the database
     await newPerson.save(function (err, person) {
@@ -54,8 +53,8 @@ router.put('/', async(req, res) => {
     // Package the updated parameters
     const update = {
       name : req.body.name,
-      companies: req.body.companies,
-      phoneNumber : req.body.phoneNumber
+      phoneNumber : req.body.phoneNumber,
+      desc: req.body.desc
     }
     // Find and update the person
     await Person.findOneAndUpdate({_id: req.body._id}, update);

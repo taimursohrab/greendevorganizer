@@ -11,12 +11,8 @@
             </p>
             <hr>
             <div class= "has-text-centered">
-              <p class="is-size-6">Owner:</p>
-              <p class="is-size-7" v-if="person.owner">{{person.owner.name}}</p> <p class="is-size-7 is-italic" v-else> None </p>
-            </div>
-            <div class= "has-text-centered">
-              <p class="is-size-6">Address:</p>
-              <p class="is-size-7" v-if="person.address">{{person.address}}</p> <p class="is-size-7 is-italic" v-else> None </p>
+              <p class="is-size-6">Phone Number:</p>
+              <p class="is-size-7" v-if="person.phoneNumber">{{person.phoneNumber}}</p> <p class="is-size-7 is-italic" v-else> None </p>
             </div>
             <div class= "has-text-centered">
               <p class="is-size-6">Description:</p>

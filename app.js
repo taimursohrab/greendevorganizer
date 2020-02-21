@@ -10,6 +10,11 @@ var cors = require('cors');
 var projectsRouter = require('./routes/projects');
 var peopleRouter = require('./routes/people');
 var checksRouter = require('./routes/checks');
+var invoicesRouter = require('./routes/invoices');
+var paymentsRouter = require('./routes/payments');
+var companiesRouter = require('./routes/companies');
+var contractsRouter = require('./routes/contracts');
+
 
 // Database connection
 mongoose.connect('mongodb://localhost:27017/greendevorganizer', {useNewUrlParser: true, useUnifiedTopology: true});
@@ -38,6 +43,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/projects', projectsRouter);
 app.use('/people', peopleRouter);
 app.use('/checks', checksRouter);
+app.use('/contracts', contractsRouter);
+app.use('/companies', companiesRouter);
+app.use('/payments', paymentsRouter);
+app.use('/invoices', invoicesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
